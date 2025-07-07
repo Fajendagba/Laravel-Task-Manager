@@ -129,37 +129,6 @@ php artisan route:cache
 php artisan view:cache
 ```
 
-3. **Configure web server (Nginx example)**
-```nginx
-server {
-    listen 80;
-    server_name yourdomain.com;
-    root /path/to/public;
-
-    index index.php;
-
-    location / {
-        try_files $uri $uri/ /index.php?$query_string;
-    }
-
-    location ~ \.php$ {
-        fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;
-        fastcgi_index index.php;
-        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
-        include fastcgi_params;
-    }
-}
-```
-
-## Future Enhancements
-
-- User authentication and multi-tenancy
-- Task due dates and reminders
-- Task labels and categories
-- Search and filtering capabilities
-- Export tasks to CSV/PDF
-- Dark mode support
-
 ## License
 
 This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
