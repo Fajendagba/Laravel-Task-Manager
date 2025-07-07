@@ -1,61 +1,165 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel Task Manager
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A clean, efficient task management application built with Laravel, featuring drag-and-drop reordering and project organization.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- ✨ **Task Management** - Create, edit, and delete tasks with ease
+- 🎯 **Priority System** - Drag-and-drop to reorder tasks by priority
+- 📁 **Project Organization** - Group tasks by projects for better organization
+- 📱 **Responsive Design** - Works seamlessly on desktop and mobile devices
+- ⚡ **Real-time Updates** - Ajax-powered updates without page refreshes
+- 🚀 **Performance Optimized** - Built to handle 10x load with efficient queries
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Requirements
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- PHP >= 8.1
+- Composer
+- MySQL >= 5.7
+- Node.js & NPM
 
-## Learning Laravel
+## Installation
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. **Clone the repository**
+```bash
+git clone <repository-url>
+cd task-manager
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+2. **Install PHP dependencies**
+```bash
+composer install
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+3. **Install NPM dependencies**
+```bash
+npm install && npm run build
+```
 
-## Laravel Sponsors
+4. **Configure environment**
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+5. **Update database credentials in `.env`**
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=task_manager
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+```
 
-### Premium Partners
+6. **Run migrations**
+```bash
+php artisan migrate
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+7. **(Optional) Seed sample data**
+```bash
+php artisan db:seed
+```
 
-## Contributing
+8. **Start the application**
+```bash
+php artisan serve
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Visit `http://localhost:8000` to access the application.
 
-## Code of Conduct
+## Usage
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+1. **Creating Projects** - Click "New Project" to organize your tasks
+2. **Adding Tasks** - Use the quick-add form to create tasks instantly
+3. **Reordering** - Drag tasks to change their priority - #1 is highest
+4. **Filtering** - Select a project from the dropdown to view specific tasks
+5. **Editing** - Click edit button on any task to modify its details
 
-## Security Vulnerabilities
+## Testing
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. **Create a test database**
+```sql
+CREATE DATABASE task_manager_test;
+```
+
+2. **Run the test suite**
+```bash
+php artisan test
+```
+
+The tests use a separate database to avoid affecting your development data.
+
+## Technical Stack
+
+- **Backend**: Laravel 10.x with Eloquent ORM
+- **Frontend**: Bootstrap 5, jQuery, jQuery UI Sortable
+- **Database**: MySQL with optimized indexes
+- **Ajax**: Seamless updates without page reloads
+
+## Architecture Decisions
+
+- **Monolithic Structure** - Keeps the application simple and easy to deploy
+- **Eloquent ORM** - Leverages Laravel's powerful ORM for clean, readable code
+- **Ajax Updates** - Provides instant feedback without full page reloads
+- **Composite Indexes** - Optimizes queries filtering by project and sorting by priority
+- **Automatic Priority Management** - Smart reordering when tasks are added or deleted
+
+## Performance Optimizations
+
+- Eager loading to prevent N+1 queries
+- Database indexing on frequently queried columns
+- Minimal DOM manipulation for smooth drag-and-drop
+- Efficient priority recalculation algorithms
+
+## Deployment (Production)
+
+1. **Set environment to production**
+```bash
+APP_ENV=production
+APP_DEBUG=false
+```
+
+2. **Optimize for production**
+```bash
+composer install --optimize-autoloader --no-dev
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+```
+
+3. **Configure web server (Nginx example)**
+```nginx
+server {
+    listen 80;
+    server_name yourdomain.com;
+    root /path/to/public;
+
+    index index.php;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+}
+```
+
+## Future Enhancements
+
+- User authentication and multi-tenancy
+- Task due dates and reminders
+- Task labels and categories
+- Search and filtering capabilities
+- Export tasks to CSV/PDF
+- Dark mode support
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
